@@ -1,0 +1,47 @@
+Standard Model + Higgs-Portal DM
+ Parameters
+  Name         | Value       |> Comment                                                                <|
+aEWM1          |127.9        |Inverse of the EW coupling constant at the Z pole                         |
+Gf             |0.0000116637 |Fermi constant                                                            |
+aS             |0.1184       |Strong coupling constant at the Z pole                                    |
+ymdo           |0.00504      |Down Yukawa mass                                                          |
+ymup           |0.00255      |Up Yukawa mass                                                            |
+yms            |0.101        |Strange Yukawa mass                                                       |
+ymc            |1.27         |Charm Yukawa mass                                                         |
+ymb            |4.7          |Bottom Yukawa mass                                                        |
+ymt            |172          |Top Yukawa mass                                                           |
+yme            |0.000511     |Electron Yukawa mass                                                      |
+ymm            |0.10566      |Muon Yukawa mass                                                          |
+ymtau          |1.777        |Tau Yukawa mass                                                           |
+Vud            |0.974461     |Magnitude of u-d CKM                                                      |
+Vus            |0.224529     |Magnitude of u-s CKM                                                      |
+Vub            |0.00364284   |Magnitude of u-b CKM                                                      |
+Vcd            |0.224379     |Magnitude of c-d CKM                                                      |
+Vcs            |0.97359      |Magnitude of c-s CKM                                                      |
+Vcb            |0.0421456    |Magnitude of c-b CKM                                                      |
+Vtd            |0.00896391   |Magnitude of t-d CKM                                                      |
+Vts            |0.0413421    |Magnitude of t-s CKM                                                      |
+Vtb            |0.999105     |Magnitude of t-b CKM                                                      |
+smix           |0.001        |Sine of higgs-scalar-mediator mixing angle                                |
+gSXX           |1.           |coupling of DM to scalar-mediator                                         |
+GG             |1.21977796370|Strong coupling constant at the Z pole   This value will be ignored and ca|
+MZ             |91.1876      |Mass of G0.                                                               |
+Me             |0.000511     |Mass of e.                                                                |
+MMU            |0.10566      |Mass of mu.                                                               |
+MTA            |1.777        |Mass of ta.                                                               |
+MU             |0.00255      |Mass of u.                                                                |
+MC             |1.27         |Mass of c.                                                                |
+MT             |172          |Mass of t.                                                                |
+MD             |0.00504      |Mass of d.                                                                |
+MS             |0.101        |Mass of s.                                                                |
+MB             |4.7          |Mass of b.                                                                |
+MDM            |1000.        |Mass of chi.                                                              |
+MH             |125          |Mass of H.                                                                |
+MSM            |1000.        |Mass of sm.                                                               |
+%WZ            |2.4952       |Width of G0.                                                              |
+%WW            |2.085        |Width of GP.                                                              |
+%WT            |1.50833649   |Width of t.                                                               |
+%WH            |0.00407      |Width of H.                                                               |
+%WSM           |0            |Width of sm.                                                              |
+E              |2.71828182845|The base of the natural logarithm.                                        |
+Pi             |3.14159265358|The circumference of a circle divided by the diameter.                    |

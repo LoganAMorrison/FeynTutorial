@@ -1,0 +1,5024 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    169315,       5016]
+NotebookOptionsPosition[    162923,       4917]
+NotebookOutlinePosition[    163329,       4933]
+CellTagsIndexPosition[    163286,       4930]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData["Quit"], "Input",
+ CellChangeTimes->{{3.789156779478492*^9, 3.789156780047618*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"02a53e4c-1eed-4351-9a20-a6dddb08d67b"],
+
+Cell[CellGroupData[{
+
+Cell["Load FeynRules and Model", "Section",ExpressionUUID->"eae3d8ab-3169-4c50-9b9e-6dcd698f162c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Load", " ", "FeynRules"}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"<<", "FeynRules`"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Load", " ", "Model"}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"LoadModel", "[", "\"\<rh_neutrino.fr\>\"", "]"}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Set", " ", "the", " ", "model", " ", "name"}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"modelName", "=", "\"\<RHNeutrino\>\""}], ";"}]}]}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"71399659-abdf-46cb-af70-b2710b253591"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox["\<\" - FeynRules - \"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023194729*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"6439a7d5-bf52-4666-aaab-09fdb163d46e"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Version: \"\>", "\[InvisibleSpace]", "\<\"2.3.36\"\>", 
+    "\[InvisibleSpace]", 
+    RowBox[{"\<\" (\"\>", " ", "\<\"28 November 2019\"\>"}], 
+    "\[InvisibleSpace]", "\<\").\"\>"}],
+   SequenceForm["Version: ", "2.3.36", " (" "28 November 2019", ")."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023196056*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"51f465df-586e-48f9-a6da-620ee9d64509"],
+
+Cell[BoxData[
+ FormBox["\<\"Authors: A. Alloul, N. Christensen, C. Degrande, C. Duhr, B. \
+Fuks\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590231985292`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"83eb37b5-c376-490b-8d1a-336143911433"],
+
+Cell[BoxData[
+ FormBox["\<\" \"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590231994953`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"85d56c34-cf2f-4531-a96e-e57ba9ca2259"],
+
+Cell[BoxData[
+ FormBox["\<\"Please cite:\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590232004013`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"e77904d2-b82e-43c5-9692-21e5dc02a7c7"],
+
+Cell[BoxData[
+ FormBox["\<\"    - Comput.Phys.Commun.185:2250-2300,2014 \
+(arXiv:1310.1921);\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023201198*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"a14add66-5afb-4047-802c-b2c5ce28a6f4"],
+
+Cell[BoxData[
+ FormBox["\<\"    - Comput.Phys.Commun.180:1614-1641,2009 \
+(arXiv:0806.4194).\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023202033*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"4de1e146-dde2-4d8b-9bea-848b587ed81f"],
+
+Cell[BoxData[
+ FormBox["\<\" \"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023202853*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"c7c377f0-d673-40a6-b22a-70b5645199b1"],
+
+Cell[BoxData[
+ FormBox["\<\"http://feynrules.phys.ucl.ac.be\"\>", TraditionalForm]], "Print",\
+
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590232036257`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"d7c0daaf-dedd-4af9-9d68-3311829937e9"],
+
+Cell[BoxData[
+ FormBox["\<\" \"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159023204496*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"d1a143fc-9c89-48c6-acb2-f83c3e2229af"],
+
+Cell[BoxData[
+ FormBox["\<\"The FeynRules palette can be opened using the command \
+FRPalette[].\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590232057*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"aa9edb82-2279-470d-a47c-3cf348377964"],
+
+Cell[BoxData[
+ FormBox["\<\"This model implementation was created by\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159026844063*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"4b8112c8-c637-40af-9d4f-dd2a19533f7f"],
+
+Cell[BoxData[
+ FormBox["\<\"Logan A. Morrison\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.7891590268452044`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"35c661b0-94cd-4e0e-9ae5-ca7dd0482138"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Model Version: \"\>", "\[InvisibleSpace]", "\<\"1.0.0\"\>"}],
+   SequenceForm["Model Version: ", "1.0.0"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159026846217*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"7b54cded-346e-4403-94f2-b8ae4fb52ce5"],
+
+Cell[BoxData[
+ FormBox["\<\"For more information, type ModelInformation[].\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.78915902684719*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"8c7e4553-c6c2-47f1-950f-3d6a72063624"],
+
+Cell[BoxData[
+ FormBox["\<\"\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159026848151*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"29b65159-2d0c-4ddf-8053-98402e3b1ab0"],
+
+Cell[BoxData[
+ FormBox["\<\"   - Loading particle classes.\"\>", TraditionalForm]], "Print",\
+
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.78915902684908*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"78ca05e2-012f-4770-9fed-848ab4bb33d1"],
+
+Cell[BoxData[
+ FormBox["\<\"   - Loading gauge group classes.\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159026987339*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"39b4b051-a133-48f0-aec4-e36ebc95f45a"],
+
+Cell[BoxData[
+ FormBox["\<\"   - Loading parameter classes.\"\>", TraditionalForm]], "Print",\
+
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159027017226*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"037f9e76-7f5b-4c48-8434-ba52f8c0dc5a"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"\\nModel \"\>", 
+    "\[InvisibleSpace]", "\<\"Standard Model + 3 RH-Neutrinos\"\>", 
+    "\[InvisibleSpace]", "\<\" loaded.\"\>"}],
+   SequenceForm["\nModel ", "Standard Model + 3 RH-Neutrinos", " loaded."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156776227364*^9, 3.789156783024601*^9}, 
+   3.789156873492525*^9, 3.789157446751225*^9, 3.789157513652087*^9, 
+   3.789158852878433*^9, 3.789159027109798*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"bfcd8755-9f3c-4cbb-940b-fa519c5fef09"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Convert Lagrangian to Dirac", "Section",ExpressionUUID->"046086b1-7e10-48f4-9618-d085e7f963a3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Lag", "=", 
+   RowBox[{"WeylToDirac", "[", "LSM", "]"}]}], ";"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"0f2d1ed7-ab7e-4e08-993e-f019eb1f46ec"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Checks", "Section",ExpressionUUID->"8df63ec2-6438-4888-962e-71ac7b8846d9"],
+
+Cell[BoxData[{
+ RowBox[{"CheckDiagonalKineticTerms", "[", "Lag", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"CheckDiagonalMassTerms", "[", "Lag", "]"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Don", "'"}], "t", " ", "worry", " ", "about", " ", "the", " ", 
+     "non"}], "-", 
+    RowBox[{"diagonal", " ", "piece", " ", 
+     RowBox[{"here", ".", " ", "They"}], " ", "would", " ", "be", " ", 
+     "canceled", " ", "by", " ", "a", " ", "gauge"}], "-", 
+    RowBox[{"fixing", " ", 
+     RowBox[{"term", "."}]}]}], " ", "*)"}]}], "\n", 
+ RowBox[{"CheckDiagonalQuadraticTerms", "[", "Lag", "]"}]}], "Input",Expressio\
+nUUID->"f1d427e1-d851-44e0-b9e6-b2f4edb74f73"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Compute Feynman Rules", "Section",ExpressionUUID->"0a85b190-513f-4776-93ad-66d6e2f6589d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"FeynmanRules", "[", "Lag", "]"}], "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"8ad61c15-2457-403a-b24e-e7de46a6c741"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  StyleBox["\<\"Starting Feynman rule calculation.\"\>",
+   StripOnInput->False,
+   LineColor->RGBColor[1, 0.5, 0],
+   FrontFaceColor->RGBColor[1, 0.5, 0],
+   BackFaceColor->RGBColor[1, 0.5, 0],
+   GraphicsColor->RGBColor[1, 0.5, 0],
+   FontWeight->Bold,
+   FontColor->RGBColor[1, 0.5, 0]], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159045037765*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"58935396-8c61-44cf-a874-3f95b2879600"],
+
+Cell[BoxData[
+ FormBox["\<\"Expanding the Lagrangian...\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159045039549*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"bcf11e05-3bab-43c3-905d-aee59259ad95"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Expanding the indices over \"\>", "\[InvisibleSpace]", "4", 
+    "\[InvisibleSpace]", "\<\" cores\"\>"}],
+   SequenceForm["Expanding the indices over ", 4, " cores"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159045040867*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"5fdd1d4b-bb99-402d-a537-effa8113b268"],
+
+Cell[BoxData[
+ FormBox["\<\"Collecting the different structures that enter the vertex.\"\>",
+   TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159054910482*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"5d7efdcb-2dd7-44aa-a5bb-c3888a06afd1"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{
+   "70", "\[InvisibleSpace]", "\<\" possible non-zero vertices have been \
+found -> starting the computation: \"\>", "\[InvisibleSpace]", 
+    DynamicBox[ToBoxes[FeynRules`FR$FeynmanRules, TraditionalForm],
+     ImageSizeCache->{12., {0., 8.}}], "\[InvisibleSpace]", "\<\" / \"\>", 
+    "\[InvisibleSpace]", "70", "\[InvisibleSpace]", "\<\".\"\>"}],
+   SequenceForm[
+   70, " possible non-zero vertices have been found -> starting the \
+computation: ", 
+    Dynamic[FeynRules`FR$FeynmanRules], " / ", 70, "."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159054980035*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"8083ee08-c6ad-4d2c-91cb-d8a947df9eb3"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"68", "\[InvisibleSpace]", "\<\" vertices obtained.\"\>"}],
+   SequenceForm[68, " vertices obtained."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.7891574530931187`*^9, 3.789157465618285*^9}, 
+   3.7891575282885*^9, 3.789158869283821*^9, 3.789159058204125*^9},
+ CellLabel->
+  "During evaluation of \
+In[6]:=",ExpressionUUID->"3bf146a8-f2f1-418f-8187-44e9de97473e"]
+}, Open  ]],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"H", "2"},
+         {"H", "3"},
+         {"H", "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "6"}], " ", "\[ImaginaryI]", " ", "lam"}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"H", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "6"}], " ", "\[ImaginaryI]", " ", "lam", " ", "vev"}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           SuperscriptBox["ghG", "\[Dagger]"],
+           TraditionalForm], "1"},
+         {"ghG", "2"},
+         {"G", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       FormBox[
+        SubscriptBox["g", "s"],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["f", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "3"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         FormBox[
+          TemplateBox[{"\"p\"","2",FormBox[
+             SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+           "Subsuperscript"],
+          TraditionalForm], "+", 
+         FormBox[
+          TemplateBox[{"\"p\"","3",FormBox[
+             SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+           "Subsuperscript"],
+          TraditionalForm]}], ")"}]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"G", "1"},
+         {"G", "2"},
+         {"G", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       FormBox[
+        SubscriptBox["g", "s"],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["f", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "2"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"a\"\>", "3"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","1",FormBox[
+              SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","2",FormBox[
+              SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","1",FormBox[
+              SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","3",FormBox[
+              SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","2",FormBox[
+              SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","3",FormBox[
+              SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}]}], ")"}]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"G", "1"},
+         {"G", "2"},
+         {"G", "3"},
+         {"G", "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"\[ImaginaryI]", " ", 
+       SuperscriptBox[
+        FormBox[
+         SubscriptBox["g", "s"],
+         TraditionalForm], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm]}]],
+              TraditionalForm]}], "-", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm]}]}], ")"}], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "3"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "4"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm]}]],
+              TraditionalForm]}], "-", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm]}]}], ")"}], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "3"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "4"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm]}], "-", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                 TraditionalForm]}]],
+              TraditionalForm], " ", 
+             FormBox[
+              SubscriptBox["\[Eta]", 
+               RowBox[{
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                 TraditionalForm], ",", 
+                FormBox[
+                 SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                 TraditionalForm]}]],
+              TraditionalForm]}]}], ")"}], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "4"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["f", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"a\"\>", "3"],
+              TraditionalForm], ",", 
+             FormBox["Gluon$1",
+              TraditionalForm]}]],
+           TraditionalForm]}]}], ")"}]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["d", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"d", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "d"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["1", TraditionalForm], ",", 
+                  FormBox["1", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","d"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["1",
+                TraditionalForm], ",", 
+               FormBox["1",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["s", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"s", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "d"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["2", TraditionalForm], ",", 
+                  FormBox["2", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","d"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["2",
+                TraditionalForm], ",", 
+               FormBox["2",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["b", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"b", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "d"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["3", TraditionalForm], ",", 
+                  FormBox["3", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","d"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["3",
+                TraditionalForm], ",", 
+               FormBox["3",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["u", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"u", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "u"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["1", TraditionalForm], ",", 
+                  FormBox["1", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","u"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["1",
+                TraditionalForm], ",", 
+               FormBox["1",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["c", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"c", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "u"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["2", TraditionalForm], ",", 
+                  FormBox["2", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","u"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["2",
+                TraditionalForm], ",", 
+               FormBox["2",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["t", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"t", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "u"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["3", TraditionalForm], ",", 
+                  FormBox["3", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","u"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["3",
+                TraditionalForm], ",", 
+               FormBox["3",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["e", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"e", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "l"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["1", TraditionalForm], ",", 
+                  FormBox["1", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","l"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["1",
+                TraditionalForm], ",", 
+               FormBox["1",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["mu", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"mu", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "l"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["2", TraditionalForm], ",", 
+                  FormBox["2", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","l"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["2",
+                TraditionalForm], ",", 
+               FormBox["2",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["ta", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"ta", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"-\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            TemplateBox[{FormBox[
+               SubscriptBox[
+                
+                TemplateBox[{"y", "l"}, "Superscript", SyntaxForm -> 
+                 SuperscriptBox], 
+                RowBox[{
+                  FormBox["3", TraditionalForm], ",", 
+                  FormBox["3", TraditionalForm]}]], TraditionalForm]},
+             "Conjugate"]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox[
+              SubscriptBox["P", "\<\"+\"\>"], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox[
+              TemplateBox[{"y","l"},
+               "Superscript"], 
+              RowBox[{
+               FormBox["3",
+                TraditionalForm], ",", 
+               FormBox["3",
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SqrtBox["2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Ne", "1"},
+         {"ve", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"MNe", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"sin", "(", 
+           RowBox[{"3", " ", 
+            FormBox[
+             SubscriptBox["\[Theta]", "e"],
+             TraditionalForm]}], ")"}], "-", 
+          RowBox[{"sin", "(", 
+           FormBox[
+            SubscriptBox["\[Theta]", "e"],
+            TraditionalForm], ")"}]}], ")"}], " ", 
+        RowBox[{"sec", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "e"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],"5"},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"2", " ", "vev"}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"ve", "1"},
+         {"ve", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNe", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Ne", "1"},
+         {"Ne", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNe", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nm", "1"},
+         {"vm", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"MNm", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"sin", "(", 
+           RowBox[{"3", " ", 
+            FormBox[
+             SubscriptBox["\[Theta]", "\[Mu]"],
+             TraditionalForm]}], ")"}], "-", 
+          RowBox[{"sin", "(", 
+           FormBox[
+            SubscriptBox["\[Theta]", "\[Mu]"],
+            TraditionalForm], ")"}]}], ")"}], " ", 
+        RowBox[{"sec", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "\[Mu]"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],"5"},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"2", " ", "vev"}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vm", "1"},
+         {"vm", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNm", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nm", "1"},
+         {"Nm", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNm", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nt", "1"},
+         {"vt", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"MNt", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"sin", "(", 
+           RowBox[{"3", " ", 
+            FormBox[
+             SubscriptBox["\[Theta]", "\[Tau]"],
+             TraditionalForm]}], ")"}], "-", 
+          RowBox[{"sin", "(", 
+           FormBox[
+            SubscriptBox["\[Theta]", "\[Tau]"],
+            TraditionalForm], ")"}]}], ")"}], " ", 
+        RowBox[{"sec", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "\[Tau]"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],"5"},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"2", " ", "vev"}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vt", "1"},
+         {"vt", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNt", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nt", "1"},
+         {"Nt", "2"},
+         {"H", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"2", " ", "\[ImaginaryI]", " ", "MNt", " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}]}], "vev"]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"A", "1"},
+         {"W", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "\[ImaginaryI]"}], " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","1",FormBox[
+              SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","2",FormBox[
+              SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","1",FormBox[
+              SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","3",FormBox[
+              SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","2",FormBox[
+              SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}], "-", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           TemplateBox[{"\"p\"","3",FormBox[
+              SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+            "Subsuperscript"],
+           TraditionalForm]}]}], ")"}]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"H", "2"},
+         {"W", "3"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        SuperscriptBox[
+         FormBox["e",
+          TraditionalForm], "2"], " ", 
+        FormBox[
+         SubscriptBox["\[Eta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "3"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "4"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{"2", " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm], "2"]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"W", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        SuperscriptBox[
+         FormBox["e",
+          TraditionalForm], "2"], " ", "vev", " ", 
+        FormBox[
+         SubscriptBox["\[Eta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "2"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "3"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{"2", " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm], "2"]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"A", "1"},
+         {"A", "2"},
+         {"W", "3"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"\[ImaginaryI]", " ", 
+       SuperscriptBox[
+        FormBox["e",
+         TraditionalForm], "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "4"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm]}], "+", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "4"],
+              TraditionalForm]}]],
+           TraditionalForm]}], "-", 
+         RowBox[{"2", " ", 
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "1"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "2"],
+              TraditionalForm]}]],
+           TraditionalForm], " ", 
+          FormBox[
+           SubscriptBox["\[Eta]", 
+            RowBox[{
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "3"],
+              TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\<\"\[Mu]\"\>", "4"],
+              TraditionalForm]}]],
+           TraditionalForm]}]}], ")"}]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"W", "1"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","1",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}], "-", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","2",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}], "-", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","1",FormBox[
+                SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","3",FormBox[
+                SubscriptBox["\"\[Mu]\"", "2"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","2",FormBox[
+                SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}], "-", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             TemplateBox[{"\"p\"","3",FormBox[
+                SubscriptBox["\"\[Mu]\"", "1"], TraditionalForm]},
+              "Subsuperscript"],
+             TraditionalForm]}]}], ")"}]}], 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"W", "1"},
+         {"W", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         SuperscriptBox[
+          FormBox["e",
+           TraditionalForm], "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "+", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{"2", " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm], "2"]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"A", "1"},
+         {"W", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"},
+         {"Z", "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         SuperscriptBox[
+          FormBox["e",
+           TraditionalForm], "2"], " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"2", " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm], " ", 
+            FormBox[
+             SubscriptBox["\[Eta]", 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "3"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"\[Mu]\"\>", "4"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"H", "2"},
+         {"Z", "3"},
+         {"Z", "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        SuperscriptBox[
+         FormBox["e",
+          TraditionalForm], "2"], " ", 
+        FormBox[
+         SubscriptBox["\[Eta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "3"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "4"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], "2"]}], 
+       RowBox[{"2", " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], "2"], " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm], "2"]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"H", "1"},
+         {"Z", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        SuperscriptBox[
+         FormBox["e",
+          TraditionalForm], "2"], " ", "vev", " ", 
+        FormBox[
+         SubscriptBox["\[Eta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "2"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"\[Mu]\"\>", "3"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], "2"]}], 
+       RowBox[{"2", " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], "2"], " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm], "2"]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"W", "1"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "2"},
+         {"Z", "3"},
+         {"Z", "4"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        SuperscriptBox[
+         FormBox["e",
+          TraditionalForm], "2"], " ", 
+        SuperscriptBox[
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "1"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "4"],
+               TraditionalForm]}]],
+            TraditionalForm], " ", 
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "2"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "3"],
+               TraditionalForm]}]],
+            TraditionalForm]}], "+", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "1"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "3"],
+               TraditionalForm]}]],
+            TraditionalForm], " ", 
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "2"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "4"],
+               TraditionalForm]}]],
+            TraditionalForm]}], "-", 
+          RowBox[{"2", " ", 
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "1"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "2"],
+               TraditionalForm]}]],
+            TraditionalForm], " ", 
+           FormBox[
+            SubscriptBox["\[Eta]", 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "3"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"\[Mu]\"\>", "4"],
+               TraditionalForm]}]],
+            TraditionalForm]}]}], ")"}]}], 
+       SuperscriptBox[
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm], "2"]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["e", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"e", "2"},
+         {"A", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "\[ImaginaryI]"}], " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["mu", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"mu", "2"},
+         {"A", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "\[ImaginaryI]"}], " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["ta", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"ta", "2"},
+         {"A", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", "\[ImaginaryI]"}], " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"ve", "1"},
+         {"e", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"cos", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "e"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         SubscriptBox[
+          RowBox[{
+           FormBox[
+            TemplateBox[{"\[Gamma]",FormBox[
+               SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+             "Superscript"],
+            TraditionalForm], ".", 
+           FormBox[
+            SubscriptBox["P", "\<\"-\"\>"],
+            TraditionalForm]}], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{
+        SqrtBox["2"], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vm", "1"},
+         {"mu", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"cos", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "\[Mu]"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         SubscriptBox[
+          RowBox[{
+           FormBox[
+            TemplateBox[{"\[Gamma]",FormBox[
+               SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+             "Superscript"],
+            TraditionalForm], ".", 
+           FormBox[
+            SubscriptBox["P", "\<\"-\"\>"],
+            TraditionalForm]}], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{
+        SqrtBox["2"], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vt", "1"},
+         {"ta", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"cos", "(", 
+         FormBox[
+          SubscriptBox["\[Theta]", "\[Tau]"],
+          TraditionalForm], ")"}], " ", 
+        FormBox[
+         SubscriptBox[
+          RowBox[{
+           FormBox[
+            TemplateBox[{"\[Gamma]",FormBox[
+               SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+             "Superscript"],
+            TraditionalForm], ".", 
+           FormBox[
+            SubscriptBox["P", "\<\"-\"\>"],
+            TraditionalForm]}], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{
+        SqrtBox["2"], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Ne", "1"},
+         {"e", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nm", "1"},
+         {"mu", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nt", "1"},
+         {"ta", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["e", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"ve", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"cos", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["mu", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"vm", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"cos", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["ta", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"vt", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"cos", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["e", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"Ne", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["mu", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"Nm", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["ta", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"Nt", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"sin", "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             SubscriptBox["P", "\<\"-\"\>"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{
+         SqrtBox["2"], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["e", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"e", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["c", "w"],
+                TraditionalForm], "2"], "-", 
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["s", "w"],
+                TraditionalForm], "2"]}], ")"}], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"-\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{"2", " ", 
+            SuperscriptBox[
+             FormBox[
+              SubscriptBox["s", "w"],
+              TraditionalForm], "2"], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"+\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["mu", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"mu", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["c", "w"],
+                TraditionalForm], "2"], "-", 
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["s", "w"],
+                TraditionalForm], "2"]}], ")"}], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"-\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{"2", " ", 
+            SuperscriptBox[
+             FormBox[
+              SubscriptBox["s", "w"],
+              TraditionalForm], "2"], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"+\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["ta", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"ta", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["c", "w"],
+                TraditionalForm], "2"], "-", 
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["s", "w"],
+                TraditionalForm], "2"]}], ")"}], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"-\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{"2", " ", 
+            SuperscriptBox[
+             FormBox[
+              SubscriptBox["s", "w"],
+              TraditionalForm], "2"], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"+\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"ve", "1"},
+         {"ve", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["cos", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vm", "1"},
+         {"vm", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["cos", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"vt", "1"},
+         {"vt", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["cos", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Ne", "1"},
+         {"ve", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["c", "w"],
+            TraditionalForm], "2"], "+", 
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["s", "w"],
+            TraditionalForm], "2"]}], ")"}], " ", 
+        RowBox[{"sin", "(", 
+         RowBox[{"2", " ", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm]}], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+            SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"4", " ", 
+        FormBox[
+         SubscriptBox["c", "w"],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Ne", "1"},
+         {"Ne", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "e"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nm", "1"},
+         {"vm", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["c", "w"],
+            TraditionalForm], "2"], "+", 
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["s", "w"],
+            TraditionalForm], "2"]}], ")"}], " ", 
+        RowBox[{"sin", "(", 
+         RowBox[{"2", " ", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm]}], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+            SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"4", " ", 
+        FormBox[
+         SubscriptBox["c", "w"],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nm", "1"},
+         {"Nm", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Mu]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nt", "1"},
+         {"vt", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{
+        FormBox["e",
+         TraditionalForm], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["c", "w"],
+            TraditionalForm], "2"], "+", 
+          SuperscriptBox[
+           FormBox[
+            SubscriptBox["s", "w"],
+            TraditionalForm], "2"]}], ")"}], " ", 
+        RowBox[{"sin", "(", 
+         RowBox[{"2", " ", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm]}], ")"}], " ", 
+        FormBox[
+         TemplateBox[{SubscriptBox["\[Gamma]", 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+            SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+          "Superscript"],
+         TraditionalForm]}], 
+       RowBox[{"4", " ", 
+        FormBox[
+         SubscriptBox["c", "w"],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {"Nt", "1"},
+         {"Nt", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["c", "w"],
+             TraditionalForm], "2"], "+", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"]}], ")"}], " ", 
+         RowBox[{
+          SuperscriptBox["sin", "2"], "(", 
+          FormBox[
+           SubscriptBox["\[Theta]", "\[Tau]"],
+           TraditionalForm], ")"}], " ", 
+         FormBox[
+          SubscriptBox[
+           RowBox[{
+            FormBox[
+             TemplateBox[{"\[Gamma]",FormBox[
+                SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+              "Superscript"],
+             TraditionalForm], ".", 
+            FormBox[
+             TemplateBox[{"\[Gamma]","5"},
+              "Superscript"],
+             TraditionalForm]}], 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"s\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm]}], 
+        RowBox[{"2", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["uq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"uq", "2"},
+         {"A", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       FractionBox["2", "3"], " ", "\[ImaginaryI]", " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["dq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"dq", "2"},
+         {"A", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{
+       RowBox[{"-", 
+        FractionBox["1", "3"]}], " ", "\[ImaginaryI]", " ", 
+       FormBox["e",
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["uq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"uq", "2"},
+         {"G", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"\[ImaginaryI]", " ", 
+       FormBox[
+        SubscriptBox["g", "s"],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        SubsuperscriptBox["T", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "2"],
+           TraditionalForm]}], 
+         FormBox[
+          SubscriptBox["\<\"a\"\>", "3"],
+          TraditionalForm]],
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["dq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"dq", "2"},
+         {"G", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"\[ImaginaryI]", " ", 
+       FormBox[
+        SubscriptBox["g", "s"],
+        TraditionalForm], " ", 
+       FormBox[
+        SubscriptBox["\[Delta]", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"f\"\>", "2"],
+           TraditionalForm]}]],
+        TraditionalForm], " ", 
+       FormBox[
+        SubsuperscriptBox["T", 
+         RowBox[{
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "1"],
+           TraditionalForm], ",", 
+          FormBox[
+           SubscriptBox["\<\"m\"\>", "2"],
+           TraditionalForm]}], 
+         FormBox[
+          SubscriptBox["\<\"a\"\>", "3"],
+          TraditionalForm]],
+        TraditionalForm], " ", 
+       FormBox[
+        TemplateBox[{SubscriptBox["\[Gamma]", 
+           RowBox[{
+             FormBox[
+              SubscriptBox["\"s\"", "1"], TraditionalForm], ",", 
+             FormBox[
+              SubscriptBox["\"s\"", "2"], TraditionalForm]}]],FormBox[
+           SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+         "Superscript"],
+        TraditionalForm]}]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["uq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"dq", "2"},
+         {"W", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        FormBox["e",
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox[
+          TemplateBox[{"V","CKM"},
+           "Superscript"], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"f\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"f\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox[
+          RowBox[{
+           FormBox[
+            TemplateBox[{"\[Gamma]",FormBox[
+               SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+             "Superscript"],
+            TraditionalForm], ".", 
+           FormBox[
+            SubscriptBox["P", "\<\"-\"\>"],
+            TraditionalForm]}], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{
+        SqrtBox["2"], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["dq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"uq", "2"},
+         {
+          FormBox[
+           SuperscriptBox["W", "\[Dagger]"],
+           TraditionalForm], "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        FormBox["e",
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        TemplateBox[{FormBox[
+           SubscriptBox[
+            
+            TemplateBox[{"V", "CKM"}, "Superscript", SyntaxForm -> 
+             SuperscriptBox], 
+            RowBox[{
+              FormBox[
+               SubscriptBox["\"f\"", "2"], TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\"f\"", "1"], TraditionalForm]}]], 
+           TraditionalForm]},
+         "Conjugate"], " ", 
+        FormBox[
+         SubscriptBox[
+          RowBox[{
+           FormBox[
+            TemplateBox[{"\[Gamma]",FormBox[
+               SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+             "Superscript"],
+            TraditionalForm], ".", 
+           FormBox[
+            SubscriptBox["P", "\<\"-\"\>"],
+            TraditionalForm]}], 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"s\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm]}], 
+       RowBox[{
+        SqrtBox["2"], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["uq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"uq", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      FractionBox[
+       RowBox[{"\[ImaginaryI]", " ", 
+        FormBox["e",
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"f\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"f\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "1"],
+            TraditionalForm], ",", 
+           FormBox[
+            SubscriptBox["\<\"m\"\>", "2"],
+            TraditionalForm]}]],
+         TraditionalForm], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"3", " ", 
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["c", "w"],
+                TraditionalForm], "2"]}], "-", 
+             SuperscriptBox[
+              FormBox[
+               SubscriptBox["s", "w"],
+               TraditionalForm], "2"]}], ")"}], " ", 
+           FormBox[
+            SubscriptBox[
+             RowBox[{
+              FormBox[
+               TemplateBox[{"\[Gamma]",FormBox[
+                  SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                "Superscript"],
+               TraditionalForm], ".", 
+              FormBox[
+               SubscriptBox["P", "\<\"-\"\>"],
+               TraditionalForm]}], 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"s\"\>", "1"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"s\"\>", "2"],
+               TraditionalForm]}]],
+            TraditionalForm]}], "-", 
+          RowBox[{"4", " ", 
+           SuperscriptBox[
+            FormBox[
+             SubscriptBox["s", "w"],
+             TraditionalForm], "2"], " ", 
+           FormBox[
+            SubscriptBox[
+             RowBox[{
+              FormBox[
+               TemplateBox[{"\[Gamma]",FormBox[
+                  SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                "Superscript"],
+               TraditionalForm], ".", 
+              FormBox[
+               SubscriptBox["P", "\<\"+\"\>"],
+               TraditionalForm]}], 
+             RowBox[{
+              FormBox[
+               SubscriptBox["\<\"s\"\>", "1"],
+               TraditionalForm], ",", 
+              FormBox[
+               SubscriptBox["\<\"s\"\>", "2"],
+               TraditionalForm]}]],
+            TraditionalForm]}]}], ")"}]}], 
+       RowBox[{"6", " ", 
+        FormBox[
+         SubscriptBox["c", "w"],
+         TraditionalForm], " ", 
+        FormBox[
+         SubscriptBox["s", "w"],
+         TraditionalForm]}]]},
+     {
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+         {
+          FormBox[
+           OverscriptBox["dq", "\<\"-\"\>"],
+           TraditionalForm], "1"},
+         {"dq", "2"},
+         {"Z", "3"}
+        },
+        GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+        GridBoxSpacings->{"Columns" -> {
+            Offset[0.27999999999999997`], {
+             Offset[0.7]}, 
+            Offset[0.27999999999999997`]}, "Rows" -> {
+            Offset[0.2], {
+             Offset[0.4]}, 
+            Offset[0.2]}}], "\[NoBreak]", ")"}], 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"\[ImaginaryI]", " ", 
+         FormBox["e",
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"f\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"f\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["\[Delta]", 
+           RowBox[{
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "1"],
+             TraditionalForm], ",", 
+            FormBox[
+             SubscriptBox["\<\"m\"\>", "2"],
+             TraditionalForm]}]],
+          TraditionalForm], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"3", " ", 
+               SuperscriptBox[
+                FormBox[
+                 SubscriptBox["c", "w"],
+                 TraditionalForm], "2"]}], "+", 
+              SuperscriptBox[
+               FormBox[
+                SubscriptBox["s", "w"],
+                TraditionalForm], "2"]}], ")"}], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"-\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}], "-", 
+           RowBox[{"2", " ", 
+            SuperscriptBox[
+             FormBox[
+              SubscriptBox["s", "w"],
+              TraditionalForm], "2"], " ", 
+            FormBox[
+             SubscriptBox[
+              RowBox[{
+               FormBox[
+                TemplateBox[{"\[Gamma]",FormBox[
+                   SubscriptBox["\"\[Mu]\"", "3"], TraditionalForm]},
+                 "Superscript"],
+                TraditionalForm], ".", 
+               FormBox[
+                SubscriptBox["P", "\<\"+\"\>"],
+                TraditionalForm]}], 
+              RowBox[{
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "1"],
+                TraditionalForm], ",", 
+               FormBox[
+                SubscriptBox["\<\"s\"\>", "2"],
+                TraditionalForm]}]],
+             TraditionalForm]}]}], ")"}]}], 
+        RowBox[{"6", " ", 
+         FormBox[
+          SubscriptBox["c", "w"],
+          TraditionalForm], " ", 
+         FormBox[
+          SubscriptBox["s", "w"],
+          TraditionalForm]}]]}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}], "\[NoBreak]", ")"}], TraditionalForm]], "Output",
+ CellChangeTimes->{{3.789157453172977*^9, 3.7891574788486147`*^9}, 
+   3.789157541163945*^9, 3.789158878507121*^9, 3.789159059101763*^9},
+ CellLabel->"Out[6]=",ExpressionUUID->"09b400f9-20b8-4ec0-a22c-be7b2f31c615"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Compute Width of N", "Section",ExpressionUUID->"7a5c0026-4cc0-43e2-8c2b-54fca3111a21"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeWidths", "[", 
+    RowBox[{"FeynmanRules", "[", 
+     RowBox[{"Lag", ",", 
+      RowBox[{"Contains", "->", 
+       RowBox[{"{", "Ne", "}"}]}]}], "]"}], "]"}], "//", "TrigExpand"}], "//",
+   "FullSimplify"}]], "Input",ExpressionUUID->"890d642d-c1c5-48a5-b37a-\
+9727d428f5dd"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Create FeynArts Output", "Section",ExpressionUUID->"481439e2-73a5-4999-89ef-4d58233642a3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Takes", " ", "some", " ", "time"}], "..."}], " ", "*)"}], "\n", 
+  RowBox[{"WriteFeynArtsOutput", "[", 
+   RowBox[{
+    RowBox[{"WeylToDirac", "[", "LSM", "]"}], ",", 
+    RowBox[{"FlavorExpand", "\[Rule]", "True"}], ",", 
+    RowBox[{"Output", "->", "modelName"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.789156792121933*^9, 3.789156796629058*^9}, {
+  3.78915720933293*^9, 3.7891572149047747`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"82c31194-51e0-4a42-b139-90d64c8e19f8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox["\<\" - - - FeynRules interface to FeynArts - - -\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157645358*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"9f47565a-7f4a-4fd0-845e-d886416de3a4"],
+
+Cell[BoxData[
+ FormBox["\<\"      C. Degrande C. Duhr, 2013\"\>", TraditionalForm]], "Print",\
+
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157646948*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"28c58f89-a96f-49db-8930-2818c20d823c"],
+
+Cell[BoxData[
+ FormBox["\<\"      Counterterms: B. Fuks, 2012\"\>", 
+  TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157648231*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"163c3af4-b18a-4caa-9c7d-c7128a8a417a"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Calculating Feynman rules for \"\>", 
+    "\[InvisibleSpace]", "\<\"L1\"\>"}],
+   SequenceForm["Calculating Feynman rules for ", "L1"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157649007*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"bc25f816-784f-472e-aeae-16b07a238b9c"],
+
+Cell[BoxData[
+ FormBox["\<\"Redefining classes in such a way that each particle is in a \
+separate FeynArts class.\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.7891591576497583`*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"fb7df31d-6a3b-4e8b-8b6a-acf07c2074ef"],
+
+Cell[BoxData[
+ FormBox["\<\"See NewFeynArtsClasses[] for more information on the new \
+classes\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.78915915765065*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"0d7bfe4a-be86-43a6-8624-511f1e445688"],
+
+Cell[BoxData[
+ FormBox["\<\"Restarting Feynman rule calculation, setting FlavorExpand -> \
+True.\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157651523*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"fbce230e-c430-4978-85dd-896fb418c301"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Calculating Feynman rules for \"\>", 
+    "\[InvisibleSpace]", "\<\"L1\"\>"}],
+   SequenceForm["Calculating Feynman rules for ", "L1"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159157652299*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"24de2e9b-1f59-4818-a9e4-0efbf56181f4"],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox["\<\"Starting Feynman rules calculation for L1.\"\>",
+   StripOnInput->False,
+   LineColor->RGBColor[1, 0.5, 0],
+   FrontFaceColor->RGBColor[1, 0.5, 0],
+   BackFaceColor->RGBColor[1, 0.5, 0],
+   GraphicsColor->RGBColor[1, 0.5, 0],
+   FontWeight->Bold,
+   FontColor->RGBColor[1, 0.5, 0]], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159161143022*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"4971ebcb-eed7-496a-8aa4-4c7e50909790"],
+
+Cell[BoxData[
+ FormBox["\<\"Expanding the Lagrangian...\"\>", TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159161143985*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"74d010c9-e962-4e3d-90c8-807629077439"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Expanding the indices over \"\>", "\[InvisibleSpace]", "4", 
+    "\[InvisibleSpace]", "\<\" cores\"\>"}],
+   SequenceForm["Expanding the indices over ", 4, " cores"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159161144903*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"4725ba17-a7d9-4042-9552-6e8972106537"],
+
+Cell[BoxData[
+ FormBox["\<\"Collecting the different structures that enter the vertex.\"\>",
+   TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159172315905*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"c1ee3d1d-fa93-4801-9be2-d49502250b75"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{
+   "114", "\[InvisibleSpace]", "\<\" possible non-zero vertices have been \
+found -> starting the computation: \"\>", "\[InvisibleSpace]", 
+    DynamicBox[ToBoxes[FeynRules`FR$FeynmanRules, TraditionalForm],
+     ImageSizeCache->{18., {0., 8.}}], "\[InvisibleSpace]", "\<\" / \"\>", 
+    "\[InvisibleSpace]", "114", "\[InvisibleSpace]", "\<\".\"\>"}],
+   SequenceForm[
+   114, " possible non-zero vertices have been found -> starting the \
+computation: ", 
+    Dynamic[FeynRules`FR$FeynmanRules], " / ", 114, "."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159172402665*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"3d3bb54e-ad87-4b14-87f3-f4fee44863e2"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"96", "\[InvisibleSpace]", "\<\" vertices obtained.\"\>"}],
+   SequenceForm[96, " vertices obtained."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159177549914*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"4254e9b3-86a6-44e8-a7ef-c595c82d8322"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Writing FeynArts model file into directory \"\>", 
+    "\[InvisibleSpace]", "\<\"RHNeutrino\"\>"}],
+   SequenceForm["Writing FeynArts model file into directory ", "RHNeutrino"],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.78915918028791*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"d5727f10-a47a-41bd-9136-80b1ae685b9d"],
+
+Cell[BoxData[
+ FormBox[
+  InterpretationBox[
+   RowBox[{"\<\"Writing FeynArts generic file on \"\>", 
+    "\[InvisibleSpace]", "\<\"RHNeutrino.gen\"\>", 
+    "\[InvisibleSpace]", "\<\".\"\>"}],
+   SequenceForm["Writing FeynArts generic file on ", "RHNeutrino.gen", "."],
+   Editable->False], TraditionalForm]], "Print",
+ CellChangeTimes->{{3.789156803558206*^9, 3.789156823368314*^9}, 
+   3.7891568888027897`*^9, 3.789159180317936*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"c6dc33cc-8082-4622-9675-ddf3bb6f6d59"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Copy", " ", "FeynArts", " ", "files", " ", "to", " ", "FeynArts"}], " ", 
+   "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"targetDir", "=", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+        "\"\<FeynArts\>\"", ",", "\"\<Models\>\"", ",", "modelName"}], "}"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", "\n", "\t", 
+    RowBox[{
+     RowBox[{
+     "If", " ", "there", " ", "is", " ", "already", " ", "a", " ", "set", " ",
+       "of", " ", "model", " ", "files", " ", "in", " ", 
+      RowBox[{
+       RowBox[{"FeynArts", "/", "Models"}], "/", "AbelianHiggs"}]}], ",", " ",
+      "\n", "\t", 
+     RowBox[{"you", " ", "can", " ", "remove", " ", "it", " ", "using", " ", 
+      RowBox[{"DeleteDirectory", "[", 
+       RowBox[{"targetDir", ",", 
+        RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}]}]}], "\n", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"CopyDirectory", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "modelName"}], "}"}], 
+      "]"}], ",", "targetDir"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.789159195649341*^9, 
+  3.7891592146882887`*^9}},ExpressionUUID->"2e221beb-44e7-49e5-adb8-\
+06d185c15f73"],
+
+Cell[BoxData[
+ FormBox[
+  TemplateBox[{
+   "DeleteDirectory","nodir",
+    "\"Directory \
+\\!\\(\\*FormBox[\\\"\\\\\\\"/Users/loganmorrison/Library/Mathematica/\
+Applications/FeynArts/Models/RHNeutrino\\\\\\\"\\\", TraditionalForm]\\) not \
+found.\"",2,9,1,31478596533888647693,"Local"},
+   "MessageTemplate"], TraditionalForm]], "Message", "MSG",
+ CellChangeTimes->{3.789159200782696*^9},
+ CellLabel->
+  "During evaluation of \
+In[8]:=",ExpressionUUID->"d21423d0-1d02-457e-ba1c-1724d84f0ecd"],
+
+Cell[BoxData[
+ FormBox["$Failed", TraditionalForm]], "Output",
+ CellChangeTimes->{3.789159200851493*^9},
+ CellLabel->"Out[9]=",ExpressionUUID->"529a149c-0144-4ff3-b4df-cbb923fa63d0"],
+
+Cell[BoxData[
+ FormBox["\<\"/Users/loganmorrison/Library/Mathematica/Applications/FeynArts/\
+Models/RHNeutrino\"\>", TraditionalForm]], "Output",
+ CellChangeTimes->{3.789159200909251*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"76f1cdff-4fcd-4bc0-a332-33b65c43caad"]
+}, Open  ]]
+}, Closed]]
+},
+WindowSize->{808, 834},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 174, 2, 41, "Input",ExpressionUUID->"02a53e4c-1eed-4351-9a20-a6dddb08d67b"],
+Cell[CellGroupData[{
+Cell[757, 26, 98, 0, 69, "Section",ExpressionUUID->"eae3d8ab-3169-4c50-9b9e-6dcd698f162c"],
+Cell[CellGroupData[{
+Cell[880, 30, 724, 18, 168, "Input",ExpressionUUID->"71399659-abdf-46cb-af70-b2710b253591"],
+Cell[CellGroupData[{
+Cell[1629, 52, 365, 7, 20, "Print",ExpressionUUID->"6439a7d5-bf52-4666-aaab-09fdb163d46e"],
+Cell[1997, 61, 653, 14, 20, "Print",ExpressionUUID->"51f465df-586e-48f9-a6da-620ee9d64509"],
+Cell[2653, 77, 419, 8, 20, "Print",ExpressionUUID->"83eb37b5-c376-490b-8d1a-336143911433"],
+Cell[3075, 87, 353, 7, 20, "Print",ExpressionUUID->"85d56c34-cf2f-4531-a96e-e57ba9ca2259"],
+Cell[3431, 96, 364, 7, 20, "Print",ExpressionUUID->"e77904d2-b82e-43c5-9692-21e5dc02a7c7"],
+Cell[3798, 105, 414, 8, 20, "Print",ExpressionUUID->"a14add66-5afb-4047-802c-b2c5ce28a6f4"],
+Cell[4215, 115, 414, 8, 20, "Print",ExpressionUUID->"4de1e146-dde2-4d8b-9bea-848b587ed81f"],
+Cell[4632, 125, 351, 7, 20, "Print",ExpressionUUID->"c7c377f0-d673-40a6-b22a-70b5645199b1"],
+Cell[4986, 134, 385, 8, 20, "Print",ExpressionUUID->"d7c0daaf-dedd-4af9-9d68-3311829937e9"],
+Cell[5374, 144, 351, 7, 20, "Print",ExpressionUUID->"d1a143fc-9c89-48c6-acb2-f83c3e2229af"],
+Cell[5728, 153, 416, 8, 20, "Print",ExpressionUUID->"aa9edb82-2279-470d-a47c-3cf348377964"],
+Cell[6147, 163, 393, 8, 20, "Print",ExpressionUUID->"4b8112c8-c637-40af-9d4f-dd2a19533f7f"],
+Cell[6543, 173, 369, 7, 20, "Print",ExpressionUUID->"35c661b0-94cd-4e0e-9ae5-ca7dd0482138"],
+Cell[6915, 182, 504, 11, 20, "Print",ExpressionUUID->"7b54cded-346e-4403-94f2-b8ae4fb52ce5"],
+Cell[7422, 195, 398, 8, 20, "Print",ExpressionUUID->"8c7e4553-c6c2-47f1-950f-3d6a72063624"],
+Cell[7823, 205, 350, 7, 20, "Print",ExpressionUUID->"29b65159-2d0c-4ddf-8053-98402e3b1ab0"],
+Cell[8176, 214, 381, 8, 20, "Print",ExpressionUUID->"78ca05e2-012f-4770-9fed-848ab4bb33d1"],
+Cell[8560, 224, 386, 8, 20, "Print",ExpressionUUID->"39b4b051-a133-48f0-aec4-e36ebc95f45a"],
+Cell[8949, 234, 383, 8, 20, "Print",ExpressionUUID->"037f9e76-7f5b-4c48-8434-ba52f8c0dc5a"],
+Cell[9335, 244, 606, 13, 36, "Print",ExpressionUUID->"bfcd8755-9f3c-4cbb-940b-fa519c5fef09"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10002, 264, 101, 0, 55, "Section",ExpressionUUID->"046086b1-7e10-48f4-9618-d085e7f963a3"],
+Cell[10106, 266, 188, 4, 41, "Input",ExpressionUUID->"0f2d1ed7-ab7e-4e08-993e-f019eb1f46ec"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10331, 275, 80, 0, 55, "Section",ExpressionUUID->"8df63ec2-6438-4888-962e-71ac7b8846d9"],
+Cell[10414, 277, 680, 15, 126, "Input",ExpressionUUID->"f1d427e1-d851-44e0-b9e6-b2f4edb74f73"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11131, 297, 95, 0, 55, "Section",ExpressionUUID->"0a85b190-513f-4776-93ad-66d6e2f6589d"],
+Cell[CellGroupData[{
+Cell[11251, 301, 180, 3, 41, "Input",ExpressionUUID->"8ad61c15-2457-403a-b24e-e7de46a6c741"],
+Cell[CellGroupData[{
+Cell[11456, 308, 582, 14, 20, "Print",ExpressionUUID->"58935396-8c61-44cf-a874-3f95b2879600"],
+Cell[12041, 324, 329, 6, 20, "Print",ExpressionUUID->"bcf11e05-3bab-43c3-905d-aee59259ad95"],
+Cell[12373, 332, 516, 11, 20, "Print",ExpressionUUID->"5fdd1d4b-bb99-402d-a537-effa8113b268"],
+Cell[12892, 345, 363, 7, 20, "Print",ExpressionUUID->"5d7efdcb-2dd7-44aa-a5bb-c3888a06afd1"],
+Cell[13258, 354, 856, 18, 20, "Print",ExpressionUUID->"8083ee08-c6ad-4d2c-91cb-d8a947df9eb3"],
+Cell[14117, 374, 448, 10, 20, "Print",ExpressionUUID->"3bf146a8-f2f1-418f-8187-44e9de97473e"]
+}, Open  ]],
+Cell[14580, 387, 137680, 4233, 3901, "Output",ExpressionUUID->"09b400f9-20b8-4ec0-a22c-be7b2f31c615"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[152309, 4626, 92, 0, 55, "Section",ExpressionUUID->"7a5c0026-4cc0-43e2-8c2b-54fca3111a21"],
+Cell[152404, 4628, 328, 9, 41, "Input",ExpressionUUID->"890d642d-c1c5-48a5-b37a-9727d428f5dd"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[152769, 4642, 96, 0, 55, "Section",ExpressionUUID->"481439e2-73a5-4999-89ef-4d58233642a3"],
+Cell[CellGroupData[{
+Cell[152890, 4646, 551, 12, 63, "Input",ExpressionUUID->"82c31194-51e0-4a42-b139-90d64c8e19f8"],
+Cell[CellGroupData[{
+Cell[153466, 4662, 329, 7, 20, "Print",ExpressionUUID->"9f47565a-7f4a-4fd0-845e-d886416de3a4"],
+Cell[153798, 4671, 315, 7, 20, "Print",ExpressionUUID->"28c58f89-a96f-49db-8930-2818c20d823c"],
+Cell[154116, 4680, 318, 7, 20, "Print",ExpressionUUID->"163c3af4-b18a-4caa-9c7d-c7128a8a417a"],
+Cell[154437, 4689, 465, 11, 20, "Print",ExpressionUUID->"bc25f816-784f-472e-aeae-16b07a238b9c"],
+Cell[154905, 4702, 370, 7, 20, "Print",ExpressionUUID->"fb7df31d-6a3b-4e8b-8b6a-acf07c2074ef"],
+Cell[155278, 4711, 347, 7, 20, "Print",ExpressionUUID->"0d7bfe4a-be86-43a6-8624-511f1e445688"],
+Cell[155628, 4720, 350, 7, 20, "Print",ExpressionUUID->"fbce230e-c430-4978-85dd-896fb418c301"],
+Cell[155981, 4729, 465, 11, 20, "Print",ExpressionUUID->"24de2e9b-1f59-4818-a9e4-0efbf56181f4"],
+Cell[156449, 4742, 570, 14, 20, "Print",ExpressionUUID->"4971ebcb-eed7-496a-8aa4-4c7e50909790"],
+Cell[157022, 4758, 309, 6, 20, "Print",ExpressionUUID->"74d010c9-e962-4e3d-90c8-807629077439"],
+Cell[157334, 4766, 496, 11, 20, "Print",ExpressionUUID->"4725ba17-a7d9-4042-9552-6e8972106537"],
+Cell[157833, 4779, 343, 7, 20, "Print",ExpressionUUID->"c1ee3d1d-fa93-4801-9be2-d49502250b75"],
+Cell[158179, 4788, 840, 18, 20, "Print",ExpressionUUID->"3d3bb54e-ad87-4b14-87f3-f4fee44863e2"],
+Cell[159022, 4808, 428, 10, 20, "Print",ExpressionUUID->"4254e9b3-86a6-44e8-a7ef-c595c82d8322"],
+Cell[159453, 4820, 506, 11, 20, "Print",ExpressionUUID->"d5727f10-a47a-41bd-9136-80b1ae685b9d"],
+Cell[159962, 4833, 539, 12, 20, "Print",ExpressionUUID->"c6dc33cc-8082-4622-9675-ddf3bb6f6d59"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[160550, 4851, 1396, 37, 189, "Input",ExpressionUUID->"2e221beb-44e7-49e5-adb8-06d185c15f73"],
+Cell[161949, 4890, 492, 12, 24, "Message",ExpressionUUID->"d21423d0-1d02-457e-ba1c-1724d84f0ecd"],
+Cell[162444, 4904, 182, 3, 39, "Output",ExpressionUUID->"529a149c-0144-4ff3-b4df-cbb923fa63d0"],
+Cell[162629, 4909, 266, 4, 37, "Output",ExpressionUUID->"76f1cdff-4fcd-4bc0-a332-33b65c43caad"]
+}, Open  ]]
+}, Closed]]
+}
+]
+*)
+

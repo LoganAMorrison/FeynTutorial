@@ -1,0 +1,295 @@
+(* *)
+
+M$ModelName = "Non-Abelian Higgs";
+
+M$Information = {
+  Authors      -> {"Logan A. Morrison"},
+  Version      -> "1.0",
+  Date         -> "25. 01. 2020",
+  Institutions -> {"University of California, Santa Cruz"},
+  Emails       -> {"loanmorr@ucsc.edu"}
+};
+
+M$vevs = { {Phi[2],vev} };
+
+M$GaugeGroups = {
+    U1Y  == {
+      Abelian          -> True,
+      CouplingConstant -> gp,
+      GaugeBoson       -> B,
+      Charge           -> Y
+    },
+    SU2L == {
+      Abelian           -> False,
+      CouplingConstant  -> gw,
+      GaugeBoson        -> Wi,
+      StructureConstant -> Eps,
+      Representations   -> {Ta, SU2D},
+      Definitions       -> {Ta[a_,b_,c_]->PauliSigma[a,b,c]/2, FSU2L[i_,j_,k_]:> I Eps[i,j,k]}
+    }
+};
+
+IndexRange[Index[SU2W]] = Unfold[Range[3]];
+IndexRange[Index[SU2D]] = Unfold[Range[2]];
+
+IndexStyle[SU2W, j];
+IndexStyle[SU2D, k];
+
+M$ClassesDescription = {
+
+    (**** PHYSICAL FIELDS ****)
+
+    (* photon *)
+    V[1] == {
+        ClassName       -> A,
+        SelfConjugate   -> True,
+        Mass            -> 0,
+        ParticleName    -> "a",
+        PropagatorLabel -> "a",
+        PropagatorType  -> Sine,
+        PropagatorArrow -> None
+    },
+    (* Z-boson *)
+    V[2] == {
+        ClassName       -> Z,
+        SelfConjugate   -> True,
+        Mass            -> MZ,
+        ParticleName    -> "Z",
+        PropagatorLabel -> "Z",
+        PropagatorType  -> Sine,
+        PropagatorArrow -> None
+    },
+    (* W-boson *)
+    V[3] == {
+        ClassName        -> W,
+        SelfConjugate    -> False,
+        Mass             -> MW,
+        QuantumNumbers   -> {Q -> 1},
+        ParticleName     -> "W+",
+        AnitParticleName -> "W-",
+        PropagatorLabel  -> "W",
+        PropagatorType   -> Sine,
+        PropagatorArrow  -> Forward
+    },
+    (* photon ghost *)
+    U[1] == {
+        ClassName       -> ghA,
+        SelfConjugate   -> False,
+        Ghost           -> A,
+        QuantumNumbers  -> {GhostNumber -> 1},
+        Mass            -> 0,
+        Width	        -> 0,
+        PropagatorLabel -> "uA",
+        PropagatorType  -> GhostDash,
+        PropagatorArrow -> Forward
+    },
+    (* Z-boson ghost *)
+    U[2] == {
+        ClassName       -> ghZ,
+        SelfConjugate   -> False,
+        Ghost           -> Z,
+        QuantumNumbers  -> {GhostNumber -> 1},
+        Mass            -> MZ,
+        PropagatorLabel -> "uZ",
+        PropagatorType  -> GhostDash,
+        PropagatorArrow -> Forward
+    },
+    (* w+ ghost *)
+    U[31] == {
+        ClassName       -> ghWp,
+        SelfConjugate   -> False,
+        Ghost           -> W,
+        QuantumNumbers  -> {GhostNumber -> 1, Q -> 1},
+        Mass            -> MW,
+        PropagatorLabel -> "uWp",
+        PropagatorType  -> GhostDash,
+        PropagatorArrow -> Forward
+    },
+    (* w- ghost *)
+    U[32] == {
+        ClassName       -> ghWm,
+        SelfConjugate   -> False,
+        Ghost           -> Wbar,
+        QuantumNumbers  -> {GhostNumber -> 1, Q -> -1},
+        Mass            -> MW,
+        Width           -> WW,
+        PropagatorLabel -> "uWm",
+        PropagatorType  -> GhostDash,
+        PropagatorArrow -> Forward
+    },
+    (* physical Higgs *)
+    S[1] == {
+        ClassName       -> H,
+        SelfConjugate   -> True,
+        Mass            -> MH,
+        PropagatorLabel -> "h",
+        PropagatorType  -> D,
+        PropagatorArrow -> None
+    },
+    (* Z-boson goldstone *)
+    S[2] == {
+        ClassName       -> G0,
+        SelfConjugate   -> True,
+        Goldstone       -> Z,
+        Mass            -> MZ,
+        PropagatorLabel -> "G0",
+        PropagatorType  -> D,
+        PropagatorArrow -> None
+    },
+    (* W-boson goldstone *)
+    S[3] == {
+        ClassName       -> GP,
+        SelfConjugate   -> False,
+        QuantumNumbers  -> {Q -> 1},
+        Goldstone       -> W,
+        Mass            -> MW,
+        PropagatorLabel -> "GP",
+        PropagatorType  -> D,
+        PropagatorArrow -> None
+    },
+
+    (**** UNPHYSICAL FIELDS ****)
+
+    (* hyper-charge gauge boson *)
+    V[11] == {
+        ClassName     -> B,
+        Unphysical    -> True,
+        SelfConjugate -> True,
+        Definitions   -> {B[mu_] -> -Sin[thetaw] * Z[mu] + Cos[thetaw] * A[mu]}
+    },
+    (* SU(2)_L gauge bosons *)
+    V[12] == {
+        ClassName     -> Wi,
+        Unphysical    -> True,
+        SelfConjugate -> True,
+        Indices       -> {Index[SU2W]},
+        FlavorIndex   -> SU2W,
+        Definitions   -> {Wi[mu_,1] -> (Wbar[mu] + W[mu]) / Sqrt[2],
+                          Wi[mu_,2] -> (Wbar[mu] - W[mu]) / (I * Sqrt[2]),
+                          Wi[mu_,3] -> Cos[thetaw] * Z[mu] + Sin[thetaw] * A[mu]}
+    },
+    (* ghost of hyper-charge gauge boson *)
+    U[11] == {
+        ClassName     -> ghB,
+        Unphysical    -> True,
+        SelfConjugate -> False,
+        Ghost         -> B,
+        Definitions   -> {ghB -> -Sin[thetaw] * ghZ + Cos[thetaw] * ghA}
+    },
+    (* ghosts of SU(2)_L gauge bosons *)
+    U[12] == {
+        ClassName     -> ghWi,
+        Unphysical    -> True,
+        SelfConjugate -> False,
+        Ghost         -> Wi,
+        Indices       -> {Index[SU2W]},
+        FlavorIndex   -> SU2W,
+        Definitions   -> {ghWi[1] -> (ghWp + ghWm) / Sqrt[2],
+                          ghWi[2] -> (ghWm - ghWp) / (I * Sqrt[2]),
+                          ghWi[3] -> Cos[thetaw] * ghZ + Sin[thetaw] * ghA}
+    },
+    (* Higgs doublet *)
+    S[11] == {
+        ClassName      -> Phi,
+        Unphysical     -> True,
+        Indices        -> {Index[SU2D]},
+        FlavorIndex    -> SU2D,
+        SelfConjugate  -> False,
+        QuantumNumbers -> {Y -> 1/2},
+        Definitions    -> {Phi[1] -> -I GP,
+                           Phi[2] -> (vev + H + I G0) / Sqrt[2]}
+    }
+};
+
+GaugeXi[ V[1]  ] = GaugeXi[A];
+GaugeXi[ V[2]  ] = GaugeXi[Z];
+GaugeXi[ V[3]  ] = GaugeXi[W];
+GaugeXi[ S[1]  ] = 1;
+GaugeXi[ S[2]  ] = GaugeXi[Z];
+GaugeXi[ S[3]  ] = GaugeXi[W];
+GaugeXi[ U[1]  ] = GaugeXi[A];
+GaugeXi[ U[2]  ] = GaugeXi[Z];
+GaugeXi[ U[31] ] = GaugeXi[W];
+GaugeXi[ U[32] ] = GaugeXi[W];
+
+
+M$Parameters = {
+    qe == {
+        ParameterType    -> External,
+        Description      -> "Electric coupling constant"
+    },
+    thetaw == {
+        ParameterType -> Internal,
+        Description   -> "Weinberg angle"
+    },
+    gw == {
+        ParameterType    -> Internal,
+        Definitions      -> {gw-> ee / Sin[thetaw]},
+        Description      -> "Weak coupling constant"
+    },
+    gp == {
+        ParameterType    -> Internal,
+        Definitions      -> {gp-> ee /Cos[thetaw]},
+        Description      -> "U(1)Y coupling constant"
+    },
+    vev == {
+        ParameterType    -> Internal,
+        Value            -> 2 * MW * Sin[thetaw] / ee,
+        Description      -> "Higgs vacuum expectation value"
+    },
+    lam == {
+        ParameterType    -> Internal,
+        Value            -> MH^2 / (2 * vev^2),
+        Description      -> "Higgs quartic coupling"
+    },
+    muH == {
+        ParameterType -> Internal,
+        Value         -> Sqrt[vev^2 * lam],
+        Description   -> "Coefficient of the quadratic piece of the Higgs potential"
+    }
+};
+
+(* generators in real representation: see below 90 of arXiv:1101.4665 *)
+GenReal[1] = (gw/2) * {{0, 0, 0, -1}, {0, 0, 1, 0}, {0, -1, 0, 0}, {1, 0, 0, 0}};
+GenReal[2] = (gw/2) * {{0, 0, 1, 0}, {0, 0, 0, 1}, {-1, 0, 0, 0}, {0, -1, 0, 0}};
+GenReal[3] = (gw/2) * {{0, -1, 0, 0}, {1, 0, 0, 0}, {0, 0, 0, 1}, {0, 0, -1, 0}};
+GenReal[4] = (gp/2) * {{0, -1, 0, 0}, {1, 0, 0, 0}, {0, 0, 0, -1}, {0, 0, 1, 0}};
+
+phiv = {GP + GPbar, -I * (GP - GPbar), vev + H, G0} / Sqrt[2];
+phivb = {0, 0, vev, 0} / Sqrt[2];
+
+
+LGauge := Block[{mu,nu,ii,aa,kin},
+    (* hyper-charge and SU(2)_L field strengths *)
+    kin = -1/4 * FS[B,mu,nu] * FS[B,mu,nu] - 1/4 * FS[Wi,mu,nu,ii] * FS[Wi,mu,nu,ii];
+    (* sum over adjoint indices *)
+    ExpandIndices[kin, FlavorExpand->SU2W]
+];
+
+
+LHiggs := Block[{ii,jj,mu,kin,pot},
+    (* Higgs kinetic term *)
+    kin = DC[Phibar[ii],mu] * DC[Phi[ii],mu];
+    (* Higgs potential *)
+    pot = -muH^2 Phibar[ii] Phi[ii] + lam Phibar[ii] Phi[ii] Phibar[jj] Phi[jj];
+    (* sum over adjoint and fundamental indices *)
+    ExpandIndices[kin - pot, FlavorExpand->{SU2D,SU2W}]
+];
+
+LGhost := Block[{kin,mass,ghv,ghvbar,TT,phiv,Mg, mu, ii},
+    (* kinetic terms *)
+    kin = -ghBbar.del[DC[ghB,mu],mu] - ghWibar[ii].del[DC[ghWi[ii],mu],mu];
+
+    (* ghost fields assembled into vector *)
+    ghv = {ghWi[1], ghWi[2], ghWi[3], ghB};
+    ghvbar = {ghWibar[1], ghWibar[2], ghWibar[3], ghBbar};
+
+    (* ghost mass + goldstone interaction matrix *)
+    Mg = Table[Dot[Dot[GenReal[a], phivb], Dot[GenReal[b], phiv]], {a, 1, 4}, {b, 1, 4}];
+    mass = - ghvbar.Mg.ghv;
+
+    (* sum over adjoint indices *)
+    ExpandIndices[kin + mass, FlavorExpand->SU2W]
+];
+
+LSMWeak := LGauge + LHiggs + LGhost;

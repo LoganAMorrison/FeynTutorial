@@ -1,0 +1,138 @@
+(* *)
+
+M$ModelName = "Abelian Higgs";
+
+M$Information = {
+  Authors      -> {"Logan A. Morrison"},
+  Version      -> "1.0",
+  Date         -> "25. 01. 2020",
+  Institutions -> {"University of California, Santa Cruz"},
+  Emails       -> {"loanmorr@ucsc.edu"}
+};
+
+M$vevs = { {Phi, vev} };
+
+M$GaugeGroups = {
+  U1EM  == {
+    Abelian          -> True,
+    CouplingConstant -> qe,
+    GaugeBoson       -> A,
+    Charge           -> Q
+  }
+};
+
+
+M$ClassesDescription = {
+
+(* Gauge bosons: physical vector fields *)
+  V[1] == {
+    ClassName       -> A,
+    SelfConjugate   -> True,
+    Mass            -> MA,
+    ParticleName    -> "A",
+    PropagatorLabel -> "A",
+    PropagatorType  -> Sine,
+    PropagatorArrow -> None
+},
+
+
+(* Higgs: physical scalars  *)
+  S[1] == {
+    ClassName       -> h,
+    SelfConjugate   -> True,
+    Mass            -> mh,
+    QuantumNumbers  -> {Q -> 1},
+    PropagatorLabel -> "h",
+    PropagatorType  -> D,
+    PropagatorArrow -> None
+  },
+
+(* Higgs: physical scalars  *)
+  S[2] == {
+    ClassName       -> G0,
+    SelfConjugate   -> True,
+    Goldstone       -> A,
+    Mass            -> MA,
+    PropagatorLabel -> "G0",
+    PropagatorType  -> D,
+    PropagatorArrow -> None
+  },
+
+(* Higgs: unphysical scalars  *)
+  S[11] == {
+    ClassName      -> Phi,
+    Unphysical     -> True,
+    SelfConjugate  -> False,
+    QuantumNumbers -> {Q -> 1},
+    Definitions    -> {Phi -> (vev + h + I G0) / Sqrt[2]}
+  },
+
+
+  U[1] == {
+    ClassName       -> ghA,
+    SelfConjugate   -> False,
+    Ghost           -> A,
+    Mass            -> MA,
+    QuantumNumbers  ->{GhostNumber -> 1},
+    ParticleName    -> "ghA",
+    PropagatorLabel -> "ghA",
+    PropagatorType  -> GhostDash,
+    PropagatorArrow -> Forward
+  }
+};
+
+GaugeXi[ V[1]  ] = GaugeXi[A];
+GaugeXi[ U[1]  ] = GaugeXi[A];
+GaugeXi[ S[1]  ] = 1;
+GaugeXi[ S[2]  ] = GaugeXi[A];
+
+
+
+M$Parameters = {
+  (* External parameters *)
+  qe == {
+    ParameterType    -> External,
+    Description      -> "Electric Charge"
+  },
+  (* Internal *)
+  vev == {
+    ParameterType    -> Internal,
+    Description      -> "Higgs vev",
+    Definitions      -> {vev -> MA / qe}
+  },
+  MU == {
+    ParameterType    -> Internal,
+    Description      -> "Higgs quadratic term",
+    Definitions      -> {MU -> mh / Sqrt[2]}
+  },
+  LAM == {
+    ParameterType    -> Internal,
+    Description      -> "Higgs quartic term",
+    Definitions      -> {LAM -> MU^2 / vev^2}
+  }
+};
+
+
+
+LGauge := Block[{mu,nu,kin,gf,xi},
+    xi = GaugeXi[A];
+    kin=-1/4 FS[A,mu,nu] FS[A,mu,nu];
+    (* NOT NEEDED: just for checking things out *)
+    gf = - 1/(2 * xi) * (del[A[mu],mu] + xi*MA*G0)^2;
+
+    kin + gf
+];
+
+
+LHiggs := Block[{mu},
+  DC[Phibar, mu] * DC[Phi, mu] + MU^2*Phibar*Phi - LAM*(Phibar*Phi)^2
+];
+
+LGhost := Block[{mu, kin, mass},
+    kin = -ghAbar.del[DC[ghA,mu],mu];
+    (* NOT NEEDED: just for checking things out *)
+    mass = GaugeXi[A] * MA * ghAbar.ghA;
+    kin + mass
+];
+
+LAbelianHiggs = LGauge + LHiggs + LGhost;
