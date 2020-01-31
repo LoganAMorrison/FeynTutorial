@@ -78,15 +78,15 @@ M$ClassesDescription = {
 
     (* SM photon *)
     V[1] == {
-        ClassName       -> A,
-        SelfConjugate   -> True,
-        Mass            -> 0,
-        Width           -> 0,
-        ParticleName    -> "a",
-        PDG             -> 22,
-        PropagatorLabel -> "a",
-        PropagatorType  -> W,
-        PropagatorArrow -> None,
+        ClassName       -> A,       (* Name of particle *)
+        SelfConjugate   -> True,    (* Complex?         *)
+        Mass            -> 0,       (* Mass of particle *)
+        Width           -> 0,       (* Numerical width  *)
+        ParticleName    -> "a",     (* Name of tools    *)
+        PDG             -> 22,      (* PDG code         *)
+        PropagatorLabel -> "a",     (* FeynArts label   *)
+        PropagatorType  -> W,       (* FeynArts label   *)
+        PropagatorArrow -> None,    (* Charged arrow    *)
         FullName        -> "Photon"
     },
     (* Z-Boson *)
@@ -231,14 +231,14 @@ M$ClassesDescription = {
     },
     (* up-type quarks *)
     F[3] == {
-        ClassName        -> uq,
-        ClassMembers     -> {u, c, t},
-        Indices          -> {Index[Generation], Index[Colour]},
-        FlavorIndex      -> Generation,
+        ClassName        -> uq,                              (* Generic up-quark *)
+        ClassMembers     -> {u, c, t},                 (* Names of the up-quarks *)
+        Indices          -> {Index[Generation], Index[Colour]},       (* Indices *)
+        FlavorIndex      -> Generation,                (* Index labeling classes *)
         SelfConjugate    -> False,
-        Mass             -> {Mu, {MU, 2.55*^-3}, {MC,1.27}, {MT,172}},
+        Mass             -> {Mu, {MU, 2.55*^-3}, {MC,1.27}, {MT,172}}, (* Masses *)
         Width            -> {0, 0, {WT,1.50833649}},
-        QuantumNumbers   -> {Q -> 2/3},
+        QuantumNumbers   -> {Q -> 2/3},                       (* Quantum numbers *)
         PropagatorLabel  -> {"uq", "u", "c", "t"},
         PropagatorType   -> Straight,
         PropagatorArrow  -> Forward,
@@ -371,11 +371,12 @@ M$ClassesDescription = {
     (* left-handed quarks doublet *)
     F[13] == {
         ClassName      -> QL,
-        Unphysical     -> True,
+        Unphysical     -> True,                     (* Not a mass eigenstate *)
         Indices        -> {Index[SU2D], Index[Generation], Index[Colour]},
         FlavorIndex    -> SU2D,
         SelfConjugate  -> False,
         QuantumNumbers -> {Y -> 1/6},
+                                         (* Replacements to mass eigenstates *)
         Definitions    -> {QL[sp1_,1,ff_,cc_] :> Module[{sp2}, ProjM[sp1,sp2] uq[sp2,ff,cc]],
                            QL[sp1_,2,ff_,cc_] :> Module[{sp2,ff2}, CKM[ff,ff2] ProjM[sp1,sp2] dq[sp2,ff2,cc]]}
     },
