@@ -1,5 +1,8 @@
 (* ::Package:: *)
 
+Quit
+
+
 (* ::Section::Closed:: *)
 (*Load FeynArts*)
 
@@ -8,92 +11,120 @@
 $FAVerbose=False;
 
 
-model=FileNameJoin[{"SU2SM","SU2SM"}];
+model=FileNameJoin[{"HiggsPortalDM","HiggsPortalDM"}];
 genericModel={"Lorentz",model};
 
 
 (* ::Section::Closed:: *)
-(*h+h->h+h*)
+(*S-> \!\(\*OverscriptBox[\(\[Chi]\), \(_\)]\)\[Chi]*)
 
 
-Top4h=CreateTopologies[0,2->2];
-Diagams4h=InsertFields[Top4h,{S[1],S[1]}->{S[1],S[1]},InsertionLevel->{Particles},
-                       Model->model,GenericModel->genericModel];
-Paint[Diagams4h,ColumnsXRows->{2,2}];
+(* ::Subsection::Closed:: *)
+(*Tree*)
 
 
-Amplitudes4H=CreateFeynAmp[Diagams4h]/.M$FACouplings;
+Module[{Top,Diags,Amp},
+	Top=CreateTopologies[0,1->2];
+	Diags=InsertFields[
+		Top,
+		{S[4]}->{F[5],-F[5]},
+		InsertionLevel->{Particles},
+		Model->model,
+		GenericModel->genericModel
+	];
+    Paint[Diags,ColumnsXRows->1,SheetHeader->None,Numbering->None];
+    Amp=CreateFeynAmp[Diags]/.M$FACouplings;
+    
+    (* Look at the momenta *)
+    Echo[Amp/.FeynAmpList[Rule[Process,x_],__][__]:>x,"Momentum Structure:"];
+    
+    (* Extract only the amplitudes *)
+    Echo[Amp/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x},"Amplitudes:"];
+]
 
 
-(* Look at the momenta *)
-Amplitudes4H/.FeynAmpList[Rule[Process,x_],__][__]:>x
+(* ::Subsection::Closed:: *)
+(*1-Loop*)
 
 
-(* Extract only the amplitudes *)
-Amplitudes4H/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x}
-
-
-(* ::Section::Closed:: *)
-(*h+h->(W+) +( W-)*)
-
-
-TopHHWW=CreateTopologies[0,2->2];
-DiagamsHHWW=InsertFields[TopHHWW,{S[1],S[1]}->{V[3],-V[3]},InsertionLevel->{Particles},
-                       Model->model,GenericModel->genericModel];
-Paint[DiagamsHHWW,ColumnsXRows->{3,2}];
-
-
-Options[CreateFeynAmp]
-
-
-AmplitudesHHWW=CreateFeynAmp[DiagamsHHWW]/.M$FACouplings;
-
-
-(* Look at the momenta *)
-AmplitudesHHWW/.FeynAmpList[Rule[Process,x_],__][__]:>x
-
-
-(* Extract only the amplitudes *)
-AmplitudesHHWW/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x}//Simplify
-
-
-(* ::Section::Closed:: *)
-(*Z0+Z0->(W+) +( W-) *)
-
-
-TopZZWW=CreateTopologies[0,2->2];
-DiagamsZZWW=InsertFields[TopZZWW,{V[2],V[2]}->{V[3],-V[3]},InsertionLevel->{Particles},
-                       Model->model,GenericModel->genericModel];
-Paint[DiagamsZZWW,ColumnsXRows->{3,2}];
-
-
-AmplitudesZZWW=CreateFeynAmp[DiagamsZZWW]/.M$FACouplings;
-
-
-(* Look at the momenta *)
-AmplitudesZZWW/.FeynAmpList[Rule[Process,x_],__][__]:>x
-
-
-(* Extract only the amplitudes *)
-AmplitudesZZWW/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x}//Simplify
+Module[{Top,Diags,Amp,AmpList,i},
+	Top=CreateTopologies[1,1->2,ExcludeTopologies->{Reducible}];
+	Diags=InsertFields[
+		Top,
+		{S[4]}->{F[5],-F[5]},
+		InsertionLevel->{Particles},
+		Model->model,
+		GenericModel->genericModel
+	];
+    Paint[Diags,ColumnsXRows->{3,2},SheetHeader->None,Numbering->None];
+    Amp=CreateFeynAmp[Diags]/.M$FACouplings;
+    
+    (* Look at the momenta *)
+    Echo[Amp/.FeynAmpList[Rule[Process,x_],__][__]:>x,"Momentum Structure:"];
+    
+    (* Extract only the amplitudes *)
+    AmpList=Amp/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x};
+    
+    For[i=1,i<=Length[AmpList],i++,
+		Echo[AmpList[[i]],"Amplitude "<>ToString[i]<>" ="];
+	];
+]
 
 
 (* ::Section::Closed:: *)
-(*h->h at 1-Loop*)
+(*\!\(\*OverscriptBox[\(\[Chi]\), \(_\)]\)\[Chi]-> H H*)
 
 
-Top2H1L=CreateTopologies[1,1->1, ExcludeTopologies->{Reducible}];
-Diagams2H1L=InsertFields[Top2H1L,{S[1]}->{S[1]},InsertionLevel->{Particles},
-                       Model->model,GenericModel->genericModel];
-Paint[Diagams2H1L,ColumnsXRows->{4,2},ImageSize->{400,200},SheetHeader->None];
+Module[{Top,Diags,Amp,AmpList,i},
+	Top=CreateTopologies[0,2->2];
+	Diags=InsertFields[
+		Top,
+		{F[5],-F[5]}->{S[1],S[1]},
+		InsertionLevel->{Particles},
+		Model->model,
+		GenericModel->genericModel
+	];
+    Paint[Diags,ColumnsXRows->{2,2},SheetHeader->None,Numbering->None];
+    Amp=CreateFeynAmp[Diags]/.M$FACouplings;
+    
+    (* Look at the momenta *)
+    Echo[Amp/.FeynAmpList[Rule[Process,x_],__][__]:>x,"Momentum Structure:"];
+    
+    (* Extract only the amplitudes *)
+    AmpList=Amp/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x};
+    
+    For[i=1,i<=Length[AmpList],i++,
+		Echo[AmpList[[i]],"Amplitude "<>ToString[i]<>" ="];
+    ]
+]
 
 
-Amplitudes2H1L=CreateFeynAmp[Diagams2H1L]/.M$FACouplings;
+(* ::Section::Closed:: *)
+(*\[Chi]-> \[Chi]*)
 
 
-(* Look at the momenta *)
-Amplitudes2H1L/.FeynAmpList[Rule[Process,x_],__][__]:>x
+Module[{Top,Diags,Amp,AmpList,i},
+	Top=CreateTopologies[1,1->1,ExcludeTopologies->{Reducible}];
+	Diags=InsertFields[
+		Top,
+		{F[5]}->{F[5]},
+		InsertionLevel->{Particles},
+		Model->model,
+		GenericModel->genericModel
+	];
+    Paint[Diags,ColumnsXRows->{2,2},SheetHeader->None,Numbering->None];
+    Amp=CreateFeynAmp[Diags]/.M$FACouplings;
+    
+    (* Look at the momenta *)
+    Echo[Amp/.FeynAmpList[Rule[Process,x_],__][__]:>x,"Momentum Structure:"];
+    
+    (* Extract only the amplitudes *)
+    AmpList=Amp/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x};
+    
+    For[i=1,i<=Length[AmpList],i++,
+		Echo[AmpList[[i]],"Amplitude "<>ToString[i]<>" ="];
+    ]
+]
 
 
-(* Extract only the amplitudes *)
-Amplitudes2H1L/.{FeynAmpList[__][x__]:>List[x]}/.{FeynAmp[__,x_]:>x}
+
